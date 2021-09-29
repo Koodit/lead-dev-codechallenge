@@ -1,0 +1,32 @@
+li:first-child:after {
+    width: 0;
+     height: 0;
+     border: 0.313em solid transparent;
+     /* 5 */
+     border-bottom: none;
+     border-top-color: #336fb5;
+     content:'';
+     vertical-align: middle;
+     display: inline-block;
+     position: relative;
+     right: -0.313em;
+  }
+
+  ul {
+      list-style-type:none;
+  }
+
+  .koodit-header__navlinks {
+      display:flex;
+      flex-direction: row;
+      
+  }
+
+  .koodit-header__navlinks li {
+    padding: .5rem 0.5rem;
+  }
+
+  .koodit-header__navlinks li a {
+    text-decoration: none;
+    color:#336fb5;
+  }
