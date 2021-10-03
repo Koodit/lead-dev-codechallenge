@@ -1,4 +1,4 @@
-li:first-child:after {
+.koodit-header__link:first-child:after {
     width: 0;
      height: 0;
      border: 0.313em solid transparent;
@@ -20,6 +20,10 @@ li:first-child:after {
       display:flex;
       flex-direction: row;
       
+  }
+
+  .koodit-header__sub-menu {
+      position:absolute;
   }
 
   .koodit-header__navlinks li {

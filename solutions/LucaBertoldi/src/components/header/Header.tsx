@@ -1,6 +1,9 @@
 import React from 'react'
 import Navbar from "./navbar/Navbar"
-import {Link} from "gatsby"
+import {Link, graphql, useStaticQuery} from "gatsby"
+
+
+
 
 export default function Header() {
     return (
