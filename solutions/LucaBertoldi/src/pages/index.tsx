@@ -1,6 +1,6 @@
 import React from "react"
 import Layout from "../components/layout-page/Layout"
-
+import JobDescription from "../components/job-description/JobDescription"
 import Form from "../components/form/Form"
 import { graphql } from 'gatsby'
 import "../style/index.css";
@@ -8,33 +8,37 @@ import "../style/index.css";
 
 
 export default function Home({data}) {
-  
+  const {gcms} = data;
+  console.log(gcms)
   return (
     <>
     
     <Layout>
  
-     
+      <JobDescription content={data}></JobDescription>
       <Form></Form>
-       
-     
+
     </Layout>
     </>
   )
 }
 
 
-export const pageQuery = graphql`
+export async function pageQuery () {
+
+const ok = await graphql`
 query MyQuery {
   gcms {
     jobDescriptions {
-      subtitleDescription
-      titleDescription
+      pageContent {
+        raw
+      }
     }
   }
 }
 `
-
+console.log(ok)
+}
 
 
 

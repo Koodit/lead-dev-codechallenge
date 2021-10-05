@@ -1,6 +1,7 @@
 import React, {useCallback, useState} from 'react'
 import {FileRejection, useDropzone} from 'react-dropzone'
 import {gql, useMutation} from "@apollo/client"
+import emailjs from "emailjs-com"
 
 const JobApplications = gql `
   mutation createJob($name: String!, $surname: String!, $email: String!, $phone: String!, $curriculum: String!) {
@@ -11,7 +12,8 @@ const JobApplications = gql `
 `;
 
 export default function Form() {
-    const [files, setFiles] = useState([])
+    const [files, setFiles] = useState([]);
+    const [inputs, setInputs] = useState({user_name:"", user_surname:"", user_email:"", user_phone:"",user_note:""});
     const onDrop = useCallback((acceptedFiles: File[],rejFiles: FileRejection[]) => {
         const mapFile = acceptedFiles.map(file => ({file, errors:[]}))
         setFiles(curr => [...curr, ...mapFile, ...rejFiles])
@@ -21,25 +23,54 @@ export default function Form() {
    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
    const [mutateFunction] = useMutation(JobApplications);
 
-   const uploadImage = async () => {
-       console.log("ok")
+
+    const handleChange = (e) =>{
+        const name = e.target.name;
+        const value = e.target.value;
+        setInputs(values => ({...values, [name]: value}))
+    }
+
+
+   const uploadImage = async (e) => {
+    const fileAdded = {};
+       console.log(inputs.user_email    )
       const form = new FormData();
-      form.append("fileUpload", files[0].file)
-      try {
-      const response = await fetch("https://api-eu-central-1.graphcms.com/v2/cku57usgd15xs01yzb9vkasor/master/upload", {
-        method: 'POST',
+      for(let i = 0; i<files.length; i++) {
+        form.set(`fileUpload`, files[i].file)
+
+        try {
+        const response = await fetch(`${process.env.GATSBY_GCMS_ENDPOINT}/upload`, {
+            method: 'POST',
+        
+            body: form,
+        })
+        const blob = await response.blob();
+        const blobtoText = await blob.text();
+        const textJson = await JSON.parse(blobtoText);
+        console.log(textJson)
        
-        body: form,
-       })
-       const blob = await response.blob();
-       const blobtoText = await blob.text();
-       const textJson = await JSON.parse(blobtoText);
-       console.log(textJson)
-       await mutateFunction({ variables: {  name: "ciao", surname: "belli", email: "ciao.belli@gmail.com", phone: "1234", curriculum: textJson.url}})
-       //ssetFiles(textJson.url)
-    } catch(err) {
-        console.log(err);
-    }  
+        fileAdded[`curriculum${i}`]= textJson.url;
+    
+        } catch(err) {
+            console.log(err);
+        } 
+    }
+    const emailTemplate = {
+        user_name: inputs.user_name,
+        user_surname: inputs.user_surname,
+        user_email: inputs.user_email,
+        user_phone: inputs.user_phone,
+        user_note: inputs.user_note,
+        user_url: JSON.stringify(fileAdded)
+    }
+   
+    await mutateFunction({ variables: {  name: inputs.user_name, surname: inputs.user_surname, email: inputs.user_email, phone: inputs.user_phone, curriculum: JSON.stringify(fileAdded)}})
+    sendEmail(emailTemplate)
+    }
+
+    const sendEmail = async (e) => {
+        const emailSend = await emailjs.send(process.env.GATSBY_SERVICE_ID, process.env.GATSBY_TEMPLATE_ID, e, process.env.GATSBY_MAILJS_ID);
+        console.log(emailSend)
     }
 
     return (
@@ -47,17 +78,22 @@ export default function Form() {
             <form
                 onSubmit={e => {
                     e.preventDefault();
-                    uploadImage()
+                    uploadImage(e)
                 }}>
                     <label>Name</label>
-                    <input type="text" name="user_name" />
+                    <input type="text" name="user_name" onChange={handleChange} value={inputs.user_name} />
                     <label>Surname</label>
-                    <input type="text" name="user_surname" />
+                    <input type="text" name="user_surname"onChange={handleChange} value={inputs.user_surname} />
                     <label>Email</label>
-                    <input type="email" name="user_email" />
+                    <input type="email" name="user_email" onChange={handleChange} value={inputs.user_email}/>
                     <label>Phone</label>
-                    <input type="email" name="user_phone" />
-                <div {...getRootProps()}>
+                    <input type="text" name="user_phone" onChange={handleChange} value={inputs.user_phone}/>
+                    <label>note</label>
+                    <textarea name="user_note" onChange={handleChange} value={inputs.user_note}></textarea>
+                
+                <button type="submit">Add Todo</button>
+            </form>
+            <div {...getRootProps()}>
                     <input {...getInputProps()} />
             
             
@@ -65,9 +101,6 @@ export default function Form() {
                     
                 
                 </div>
-               
-                <button type="submit">Add Todo</button>
-            </form>
         </div>
     )
 }
