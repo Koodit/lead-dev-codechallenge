@@ -1,45 +1,60 @@
 import React from "react"
 import Layout from "../components/layout-page/Layout"
 import JobDescription from "../components/job-description/JobDescription"
+import PageTitle from "../components/pageTitle/PageTitle"
 import Form from "../components/form/Form"
-import { graphql } from 'gatsby'
+import {gql, useQuery} from "@apollo/client"
 import "../style/index.css";
 
+const GET_CONTENT = gql`
+  query MyQuery {
+  jobOffer(where: {titleOffer: "Lead Web Developer"}) {
+    id
+    titleOffer
+    descriptionToOffer {
+      ... on ApplicationForm {
+        name
+        surname
+        email
+        phone
+        note
+        id
+      }
+      ... on JobDescription {
+        title
+        descriptionText {
+          html
+        }
+        id
+      }
+    }
+  }
+}`;
 
+export default function Home() {
+  const { loading, error, data } = useQuery(GET_CONTENT);
 
-export default function Home({data}) {
-  const {gcms} = data;
-  console.log(gcms)
+  if (loading) return 'Loading...';
+  if (error) return `Error! ${error.message}`;
+  const {jobOffer:{descriptionToOffer}} = data;
+  console.log(data);
+  console.log(descriptionToOffer);
   return (
     <>
     
     <Layout>
- 
-      <JobDescription content={data}></JobDescription>
-      <Form></Form>
-
+      {<PageTitle title={data.jobOffer.titleOffer}></PageTitle>
+}     <section className="Job-description__container">
+        {descriptionToOffer.map(e => {
+          return (
+              e.__typename === "JobDescription" ?
+              <JobDescription key={e.id} title={e.title} text={e.descriptionText} ></JobDescription> :
+              ""
+           )
+        })} 
+      </section>
+      <Form formInput={descriptionToOffer}></Form>
     </Layout>
     </>
   )
 }
-
-
-export async function pageQuery () {
-
-const ok = await graphql`
-query MyQuery {
-  gcms {
-    jobDescriptions {
-      pageContent {
-        raw
-      }
-    }
-  }
-}
-`
-console.log(ok)
-}
-
-
-
-

@@ -1,0 +1,21 @@
+.form-application__container {
+    display:flex;
+    flex-direction: row;
+}
+
+.form-cv-column {
+    display:flex;
+    flex-direction: column;
+}
+
+.form-application__input {
+    display:block;
+    width:100%;
+    max-width: 600px;
+}
+
+.dropzone {
+    border:2px dashed #336fb5;
+    position:relative;
+    border-radius:5px;
+}

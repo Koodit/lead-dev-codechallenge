@@ -21,6 +21,7 @@
     "fs-react": "0.0.4",
     "gatsby": "^3.13.1",
     "gatsby-source-graphql": "^3.14.0",
+    "html-react-parser": "^1.4.0",
     "isomorphic-fetch": "^3.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

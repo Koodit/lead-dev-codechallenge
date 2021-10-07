@@ -1,0 +1,32 @@
+.Job-description__container {
+    margin-top:2rem;
+}
+
+.Job-description__title-container {
+    display:flex;
+    background-color: #336fb5;
+    color:#fff;
+    border:1px solid #336fb5;
+    border-radius:15px;
+    padding: .75rem 1.25rem;
+    z-index:200;
+    margin-bottom:4px;
+}
+
+.Job-description__title {
+    font-size:1.3rem;
+    font-weight: 700;
+    margin:0 0 0 1rem;
+}
+
+.Job-description__text {
+    color: #336fb5;
+    padding:1.25rem;
+}
+
+.Job-description__btn-logo {
+    display:flex;
+    align-items: center;
+    font-size:25px;
+    font-weight: 700;
+}

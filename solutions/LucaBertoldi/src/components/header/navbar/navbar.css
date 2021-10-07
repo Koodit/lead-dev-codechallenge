@@ -12,14 +12,10 @@
      right: -0.313em;
   }
 
-  ul {
-      list-style-type:none;
-  }
-
   .koodit-header__navlinks {
       display:flex;
       flex-direction: row;
-      
+      list-style-type:none;
   }
 
   .koodit-header__sub-menu {
