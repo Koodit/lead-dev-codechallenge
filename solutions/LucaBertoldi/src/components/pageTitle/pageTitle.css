@@ -1,3 +1,18 @@
 .page-title__container {
     margin-top:13rem;
+    color:#336fb5;
+}
+
+.page-title{
+    margin:0;
+    font-weight: 600;
+    font-size:55px;
+}
+
+.application-title {
+    margin:0;
+    line-height: 1.2;
+    font-weight: 500;
+    color:#3470B6;
+    font-size:30px;
 }

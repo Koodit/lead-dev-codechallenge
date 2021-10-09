@@ -14,11 +14,11 @@ const JobApplications = gql `
 `;
 
 export default function Form(props) {
-    console.log(props);
     const [files, setFiles] = useState([]);
     const [inputs, setInputs] = useState({user_name:"", user_surname:"", user_email:"", user_phone:"",user_note:""});
     const [preview, setPreview] = useState([{display:false, list: ""}]);
     const [progress, setProgress] = useState(0);
+    const [check, setCheck] = useState(false);
 
 
      const onDrop = useCallback((acceptedFiles: File[],rejFiles: FileRejection[]) => {
@@ -35,7 +35,9 @@ export default function Form(props) {
    const [mutateFunction] = useMutation(JobApplications);
 
 
-
+    const handleCheck = () => {
+        setCheck(!check)
+    }
   
 
     const handleChange = (e) =>{
@@ -105,29 +107,37 @@ export default function Form(props) {
                     e.preventDefault();
                     uploadImage(e)
                 }}>
-  
-                    <input type="text" name="user_name" className="form-application__input" onChange={handleChange} value={inputs.user_name} placeholder={props.formInput[8].name} />
-     
-                    <input type="text" name="user_surname" className="form-application__input" onChange={handleChange} value={inputs.user_surname} placeholder={props.formInput[8].surname} />
-
-                    <input type="email" name="user_email" className="form-application__input" onChange={handleChange} value={inputs.user_email} placeholder={props.formInput[8].email}/>
-  
-                    <input type="text" name="user_phone" className="form-application__input" onChange={handleChange} value={inputs.user_phone} placeholder={props.formInput[8].phone}/>
-
+                    <div className="form-row__container">
+                        <div className="form-row__row">
+                            <input type="text" name="user_name" className="form-application__input" onChange={handleChange} value={inputs.user_name} placeholder={`${props.formInput[8].name}*`} />
+            
+                            <input type="text" name="user_surname" className="form-application__input" onChange={handleChange} value={inputs.user_surname} placeholder={props.formInput[8].surname} />
+                        </div>
+                        <div className="form-row__row">
+                            <input type="email" name="user_email" className="form-application__input" onChange={handleChange} value={inputs.user_email} placeholder={props.formInput[8].email}/>
+        
+                            <input type="text" name="user_phone" className="form-application__input" onChange={handleChange} value={inputs.user_phone} placeholder={props.formInput[8].phone}/>
+                        </div>
+                    </div>
                     <textarea name="user_note" className="form-application__input" onChange={handleChange} value={inputs.user_note} placeholder={props.formInput[8].note}></textarea>
                     {console.log(files)}
+               
                     <div className="dropzone-container">
-                        <p>Carica il tuo curriculum (obbligatorio file pdf max 1.5MB)</p>
+                        <p className="dropzone-file-size"><b>Carica il tuo curriculum</b> (obbligatorio file pdf max 1.5MB)</p>
                         
                        <div className="dropzone" {...getRootProps()}>
                             <input {...getInputProps()} />
                     
-                           
-                            <p>Drag 'n' drop some files here, or click to select files</p>
+                            <div className="dropzone-message-container">
+                                <h3 className="dropzone-title">Drag & Drop del file qui</h3>
+                                <span> o</span> 
+                                <div>Cerca...</div>
+                            </div>
                             
-                            <em>{files.length} of 10</em>
+                            <em className="dropzone-file__counter">{files.length} of 10</em>
                         
                         </div>
+                        
                         {
 
                         preview.map((e, i) => {
@@ -152,8 +162,26 @@ export default function Form(props) {
                             
                         })}
                        
+                       <div className="section-privacy">
+                           <h6 className="section-privacy__title">Per la tua privacy</h6>
+                           <p className="section-privacy__article"> Dichiaro di aver letto l'informativa su privacy e cookie e autorizzo Koodit s.r.l. al trattamento dei miei dati personali, in conformità con il Regolamento Europeo Privacy 679/2016.</p>
+                           <p className="section-privacy__article">*Acconsento al trattamento dei miei dati personali per le finalità di invio di materiale promozionale e marketing da parte di Koodit s.r.l</p>
+                           <div>
+                               <input type="checkbox" id="agree" value="Acconsento"/>
+                               <label htmlFor="agree">Acconsento (*)</label>
+                           </div>
+                           <p className="section-privacy__article">*Autorizzo il trattamento dei miei dati personali ai sensi del Dlgs 196 del 30 giugno 2003 e dell’art. 13 GDPR (Regolamento UE 2016/679) ai fini della ricerca e selezione del personale.</p>
+                           <div>
+                               <input type="checkbox" id="agree" value="Acconsento" onClick={handleCheck}/>
+                               <label htmlFor="agree">Autorizzo (*)</label>
+                           </div>
+                       </div>
                     </div>
-                <button type="submit">Add Todo</button>
+                    {   check ?
+                        <button className="send-application" type="submit">INVIA CANDIDATURA</button> :
+                        <button className="send-application opacity" type="submit" disabled>INVIA CANDIDATURA</button>
+                    }
+               
             </form>
 
             </div>
