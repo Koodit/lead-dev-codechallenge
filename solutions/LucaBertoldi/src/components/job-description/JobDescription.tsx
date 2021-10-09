@@ -25,7 +25,8 @@ export default function JobDescription(props) {
     //console.log(props.chiSiamo.html.split(/<h3>|<\/h3>/smg)[1])
     return (
             <>
-            <div className="Job-description__title-container" onClick={e=> handleClick(e)}><span className="Job-description__btn-logo">{toggleClick ? "x" : "+"}</span> <h3 className="Job-description__title">{props.title}</h3></div>
+            <div className="Job-description__title-container" onClick={e=> handleClick(e)}><span className="Job-description__btn-logo">{toggleClick ? "x" : "+"}</span> 
+            <span className="Job-description__title">{props.title}</span></div>
             {   toggleClick ?
                 <div className="Job-description__text">{parse(props.text.html)}</div> :
                 ""
