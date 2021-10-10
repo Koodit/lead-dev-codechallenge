@@ -20,9 +20,19 @@
 
   .koodit-header__sub-menu {
       position:absolute;
+      list-style-type:none;
+      color:#336fb5;
+      text-align:center;
+      background-color: #fff;
+      border:1px solid rgba(0,0,0,.15);
+      padding:.5rem 0
+  }
+  .koodit-header__sub-menu li {
+    padding:.25rem 1.5rem
   }
 
-  .koodit-header__navlinks li {
+
+  .koodit-header__link {
     padding: .5rem 0.5rem;
   }
 

@@ -6,8 +6,9 @@
 }
 
 body {
-    margin: 0 88px;
     line-height: 1.5;
+    padding:0;
+    margin:0;
 }
 
 form {
@@ -20,4 +21,8 @@ form {
 
 .data-html p:first-child{
     font-size:2em;
+}
+
+.margin-page {
+    margin: 0 88px;
 }

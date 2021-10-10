@@ -4,6 +4,8 @@
 @import "./global.css";
 @import "../components/header/navbar/navbar.css";
 @import "../components/header/header.css";
+@import "../components/layout-page/layout.css";
 @import "../components/pageTitle/pageTitle.css";
 @import "../components/job-description/jobDescription.css";
-@import "../components/form/form.css"
+@import "../components/form/form.css";
+@import "../components/footer/footer.css"

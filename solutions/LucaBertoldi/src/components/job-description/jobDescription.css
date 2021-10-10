@@ -22,6 +22,7 @@
 .Job-description__text {
     color: #336fb5;
     padding:1.25rem;
+    font-weight: 400;
 }
 
 .Job-description__btn-logo {

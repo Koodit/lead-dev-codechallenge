@@ -1,0 +1,86 @@
+.koodit-footer {
+    display: block;
+    margin-top: 5rem;
+    padding: 30px 0px;
+    background-color: #336fb5;
+    color:#fff;
+    width: 100%;
+    overflow: hidden;
+}
+
+.koodit-info__container {
+    display:flex;
+    flex-direction: column;
+    margin:0 104px;
+    
+}
+
+.koodit-headquarter__container {
+    display:flex;
+    flex-direction: row;
+    padding-bottom:3rem;
+    padding-top:3rem;
+}
+
+.koodit-headquarter__logo {
+    padding:0 15px;
+    width: 22%;
+}
+
+.koodit-headquarter__description {
+    font-size:11px;
+}
+
+.koodit-headquarter__info {
+    display:flex;
+    flex-direction: column;
+}
+
+.koodit-headquarter__info-container:nth-child(2) {
+  padding-top:24px;
+}
+
+.koodit-headquarter__info-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.koodit-general__container {
+    display: flex;
+    flex-direction: row;
+}
+
+.koodit-general__koodit-data {
+    width:80%;
+}
+
+.koodit-general__title {
+    padding-top:24px;
+    font-size:16px;
+    font-weight: 600;
+    margin-bottom:8px;
+}
+
+.koodit-general__description {
+    font-size:15px;
+    font-weight: 300;
+}
+
+.koodit-general__brand-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width:100%;
+}
+
+.koodit-general__social-icon__container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.social-icon {
+    margin-right: 16px;
+    font-size:35px;
+    background-color: none;
+}

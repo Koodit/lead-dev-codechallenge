@@ -3,7 +3,6 @@ import {FileRejection, useDropzone} from 'react-dropzone'
 import {gql, useMutation} from "@apollo/client"
 import emailjs from "emailjs-com"
 import axios from 'axios';
-import 'react-dropzone-uploader/dist/styles.css'
 
 const JobApplications = gql `
   mutation createJob($name: String!, $surname: String!, $email: String!, $phone: String!, $curriculum: String!) {
@@ -113,12 +112,12 @@ export default function Form(props) {
                         <div className="form-row__row">
                             <input type="text" name="user_name" className="form-application__input" onChange={handleChange} value={inputs.user_name} placeholder={`${props.formInput[8].name}*`} />
             
-                            <input type="text" name="user_surname" className="form-application__input" onChange={handleChange} value={inputs.user_surname} placeholder={props.formInput[8].surname} />
+                            <input type="text" name="user_surname" className="form-application__input" onChange={handleChange} value={inputs.user_surname} placeholder={`${props.formInput[8].surname}*`} />
                         </div>
                         <div className="form-row__row">
-                            <input type="email" name="user_email" className="form-application__input" onChange={handleChange} value={inputs.user_email} placeholder={props.formInput[8].email}/>
+                            <input type="email" name="user_email" className="form-application__input" onChange={handleChange} value={inputs.user_email} placeholder={`${props.formInput[8].email}*`}/>
         
-                            <input type="text" name="user_phone" className="form-application__input" onChange={handleChange} value={inputs.user_phone} placeholder={props.formInput[8].phone}/>
+                            <input type="text" name="user_phone" className="form-application__input" onChange={handleChange} value={inputs.user_phone} placeholder={`${props.formInput[8].phone}*`}/>
                         </div>
                     </div>
                     <textarea name="user_note" className="form-application__input" onChange={handleChange} value={inputs.user_note} placeholder={props.formInput[8].note}></textarea>

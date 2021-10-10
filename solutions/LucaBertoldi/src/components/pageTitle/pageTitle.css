@@ -1,5 +1,16 @@
+.page-path {
+    color:#336fb5;
+}
+
+.page-path a {
+    padding:0 5px;
+    text-decoration: none;
+}
+.page-path a:hover {
+    text-decoration: underline;
+}
+
 .page-title__container {
-    margin-top:13rem;
     color:#336fb5;
 }
 
