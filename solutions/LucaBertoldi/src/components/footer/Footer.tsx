@@ -23,7 +23,7 @@ export default function Footer() {
             
                 <div>
                     <div className="koodit-general__container">
-                        <div>
+                        <div className="koodit-general__koodit-data">
                             <h4  className="koodit-general__title">KOODIT SRL</h4>
                             <span className="koodit-general__description"> Sede legale: Via Nazario Sauro,10 <br/> 13900 Biella (BI) <br/>  P.IVA 02572680029 <br/> PEC: koodit@legalmail.it Capitale sociale: 10.000,00€ (interamente versati)</span>
                         </div>

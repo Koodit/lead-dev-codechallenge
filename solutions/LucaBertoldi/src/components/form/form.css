@@ -1,6 +1,4 @@
-.form-application__container {
-    max-width: 55%;
-}
+
 
 .form-cv-column {
     display:flex;
@@ -79,12 +77,20 @@
     border-bottom:2px solid #336fb5;
 }
 
-.form-row__row {
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
+.form-application__account-description {
+    padding: 20px 0px 20px 0;
 }
 
+.form-row__container {
+    display:flex;
+    flex-direction: column;
+}
+
+.form-row__row {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 
 input:focus{
@@ -122,3 +128,21 @@ input:focus{
 .opacity {
     opacity:0.65;
 }
+
+.form-application__account-container {
+    margin-bottom:50px;
+}
+
+@media all and (min-width: 992px) {
+    .form-application__container {
+        max-width: 55%;
+    }
+    .form-row__row {
+        flex-direction: row;
+    }
+
+    .form-application__account-description {
+        padding: 20px 50px 20px 0;
+    }
+}
+

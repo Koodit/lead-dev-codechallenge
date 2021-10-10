@@ -11,23 +11,33 @@
     padding: .75rem 1.25rem;
     z-index:200;
     margin-bottom:4px;
+    position: relative;
 }
 
 .Job-description__title {
     font-size:1.3rem;
     font-weight: 700;
-    margin:0 0 0 1rem;
+    margin:0 0 0 2.5rem;
 }
 
 .Job-description__text {
     color: #336fb5;
     padding:1.25rem;
     font-weight: 400;
+
 }
 
 .Job-description__btn-logo {
     display:flex;
     align-items: center;
-    font-size:25px;
+    font-size:43px;
     font-weight: 700;
+    position:absolute;
+    left:15px;
+    top:-3px;
+}
+
+.open {
+    font-size:35px;
+    top:0px;
 }

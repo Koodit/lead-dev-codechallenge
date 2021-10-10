@@ -3,6 +3,7 @@ import {FileRejection, useDropzone} from 'react-dropzone'
 import {gql, useMutation} from "@apollo/client"
 import emailjs from "emailjs-com"
 import axios from 'axios';
+import parse from 'html-react-parser';
 
 const JobApplications = gql `
   mutation createJob($name: String!, $surname: String!, $email: String!, $phone: String!, $curriculum: String!) {
@@ -100,6 +101,7 @@ export default function Form(props) {
     }
     console.log(files)
     console.log(preview)
+    console.log(props.formInput[8].account.html)
     return (
         <div className="form-application__container">
             <div className="form-cv-column">
@@ -120,7 +122,16 @@ export default function Form(props) {
                             <input type="text" name="user_phone" className="form-application__input" onChange={handleChange} value={inputs.user_phone} placeholder={`${props.formInput[8].phone}*`}/>
                         </div>
                     </div>
-                    <textarea name="user_note" className="form-application__input" onChange={handleChange} value={inputs.user_note} placeholder={props.formInput[8].note}></textarea>
+                    <div className="form-application__account-container">
+                        <div className="form-application__account-description">
+                            {parse(props.formInput[8].account.html)}
+                        </div>
+                        <div>
+                            <input type="text" className="form-application__input" placeholder="Username Github" value={inputs.user_note} onChange={handleChange}/>
+                        </div>
+                    </div>
+                    {//<textarea name="user_note" className="form-application__input" onChange={handleChange} value={inputs.user_note} placeholder={props.formInput[8].note}></textarea>
+                    }
                     {console.log(files)}
                
                     <div className="dropzone-container">

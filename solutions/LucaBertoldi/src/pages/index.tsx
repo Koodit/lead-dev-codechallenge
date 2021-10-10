@@ -17,7 +17,9 @@ const GET_CONTENT = gql`
         surname
         email
         phone
-        note
+        account {
+          html
+        }
         id
       }
       ... on JobDescription {

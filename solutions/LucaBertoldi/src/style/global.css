@@ -24,5 +24,11 @@ form {
 }
 
 .margin-page {
-    margin: 0 88px;
+    margin: 0 30px;
+}
+
+@media all and (min-width: 576px) {
+    .margin-page {
+        margin: 0 88px;
+    }
 }

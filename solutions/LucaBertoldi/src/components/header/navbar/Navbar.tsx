@@ -1,19 +1,32 @@
-import React from 'react'
-import {useState} from 'react';
+import React, {useState}  from 'react'   
 import {Link} from "gatsby"
 
 export default function Navbar() {
     const [status, setStatus] = useState(false)
-
+    const [nav, setNav] = useState(false)
+    
 
     function handleClick(e) {
         setStatus(!status);
     }
 
+    const handleNav = () => {
+        setNav(!nav);
+    }
+    
+
+    
+
 
     return (
+        
         <nav className="koodit-header__navbar">
-            <ul className="koodit-header__navlinks">
+            <div className={nav ? "koodit-header__hamburger change": "koodit-header__hamburger" } onClick={handleNav}>
+                <div className="bar1"></div>
+                <div className="bar2"></div>
+                <div className="bar3"></div>
+            </div>
+            <ul className={nav ? "koodit-header__navlinks mobile-nav" : "koodit-header__navlinks"}>
                 <li onClick={e => handleClick(e)} className="koodit-header__link"><Link  to="#">Servizi</Link>
                 {status ? 
                 <ul className="koodit-header__sub-menu">

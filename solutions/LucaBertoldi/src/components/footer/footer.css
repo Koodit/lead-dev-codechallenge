@@ -6,12 +6,13 @@
     color:#fff;
     width: 100%;
     overflow: hidden;
+    margin-left:0
 }
 
 .koodit-info__container {
     display:flex;
     flex-direction: column;
-    margin:0 104px;
+    margin:0 10px;
     
 }
 
@@ -24,7 +25,8 @@
 
 .koodit-headquarter__logo {
     padding:0 15px;
-    width: 22%;
+    width: 13%;
+    margin-right:100px;
 }
 
 .koodit-headquarter__description {
@@ -47,7 +49,7 @@
 
 .koodit-general__container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .koodit-general__koodit-data {
@@ -68,19 +70,48 @@
 
 .koodit-general__brand-logo {
     display: flex;
+    margin-top:25px;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
     width:100%;
 }
 
 .koodit-general__social-icon__container {
+    margin-top:50px;
     display: flex;
-    justify-content: flex-end;
 }
 
 .social-icon {
     margin-right: 16px;
-    font-size:35px;
+    font-size:45px;
     background-color: none;
+}
+
+@media all and (min-width: 576px) {
+    .koodit-general__container {
+        flex-direction: row;
+    }
+
+    .koodit-general__brand-logo {
+        margin-top:0;
+        align-items: center;
+    }
+
+    .koodit-general__social-icon__container {
+        margin-top:0px;
+        justify-content: flex-end;
+    }
+
+    .social-icon {
+        font-size:35px;
+    }
+
+    .koodit-info__container {
+        margin:0 104px;
+    }
+
+    .koodit-headquarter__logo {
+        width: 22%;
+        margin-right:0;
+    }
 }
