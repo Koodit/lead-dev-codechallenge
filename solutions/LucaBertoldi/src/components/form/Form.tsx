@@ -48,6 +48,7 @@ export default function Form(props) {
 
     const handleDelete = (e, list) => {
         setPreview(curr => curr.filter(e=> e.list === list ? "" : e))
+        setFiles(curr => curr.filter(e=> e.file.name === list ? "" : e))
     }
   
    const uploadImage = async (e) => {
@@ -98,6 +99,7 @@ export default function Form(props) {
         const emailSend = await emailjs.send(process.env.GATSBY_SERVICE_ID, process.env.GATSBY_TEMPLATE_ID, e, process.env.GATSBY_MAILJS_ID);
         console.log(emailSend)
     }
+    console.log(files)
     console.log(preview)
     return (
         <div className="form-application__container">

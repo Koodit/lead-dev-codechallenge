@@ -1,0 +1,19 @@
+FROM node:13-alpine
+
+WORKDIR /app
+
+COPY ["package.json", "package-lock.json*", "./"]
+
+RUN npm install 
+RUN npm install --global gatsby-cli
+
+COPY . .
+
+ENV GATSBY_GCMS_ENDPOINT=${GATSBY_GCMS_ENDPOINT}
+ENV GATSBY_GRAPHCMS_ASSET_TOKEN=${GATSBY_GRAPHCMS_ASSET_TOKEN}
+ENV GATSBY_MAILJS_ID=${GATSBY_MAILJS_ID}
+ENV GATSBY_SERVICE_ID=${GATSBY_SERVICE_ID}
+ENV GATSBY_TEMPLATE_ID=${GATSBY_TEMPLATE_ID}
+
+
+CMD ["gatsby", "develop", "-H", "0.0.0.0"]
