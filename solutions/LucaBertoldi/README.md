@@ -5,6 +5,7 @@
 **SITE ARCHITECTURE.**
 
 I decided to use **GRAPHCMS** for this project. Based on the deadline and my actual knowleadge I thought to use an HEADLESS CMS that manage not only the backend but also the database. GraphCMS is very intuitive and simple to use. I decided to create four models:
+
     - **JobApplication**: model that'll receive all the data from the form;
     - **JobDescription**: model that'll send the data for the page;
     - **formApplication**: model that'll send the data for the form;
