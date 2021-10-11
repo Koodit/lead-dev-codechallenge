@@ -33,7 +33,7 @@ export default function Form(props) {
         //const previewFile = acceptedFiles.map(file => setPreview(curr => [...curr, {display:true, list: file.name}]));
         setFiles(curr => [...curr, ...mapFile])
         setErrorDrop(errors[0])
-        
+        console.log(preview)
       }, [])
   
 
@@ -157,15 +157,16 @@ export default function Form(props) {
                             <em className="dropzone-file__counter">{files.length} of 10</em>
                         
                         </div>
-                        {<p>{errorDrop}</p>
+                        {<p className="dropzone-errors">{errorDrop}</p>
                         }
 
                         {
-
+                        
                         preview.map((e, i) => {
-                          const list = e.list;
+                          const list: string = e.list;
+                          console.log(e.list)
                            return (
-                                e.display ?
+                                e.display && e.list !== undefined?
                                 <div key={i} onClick={()=>handleDelete(e, list)}>
                                     
                                     <div>X</div>

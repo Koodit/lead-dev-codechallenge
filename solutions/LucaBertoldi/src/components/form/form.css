@@ -59,6 +59,10 @@
     height:10px;
 }
 
+.dropzone-errors {
+    color: red;
+}
+
 .form-application__input {
     padding:.375rem .75rem;
     background-color: #fff;
