@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 
 export default function Privacy() {
-    const [check, setCheck] = useState<boolean>(false);
-
+    const [check, setCheck] = useState<boolean> (false);
+ 
+    
     const handleCheck = () => {
         setCheck(!check)
     }

@@ -53,6 +53,26 @@
     border-radius:5px;
 }
 
+.dropzone-file__container {
+    margin-top:5px;
+}
+
+.dropzone-delete__container {
+    text-align:right;
+    margin-right: 20px;
+    margin-top:10px;
+    font-size:20px;
+}
+
+.dropzone-file__progress-container {
+    width:100%;
+}
+
+.dropzone-file__icon {
+    font-size:20px;
+    margin-right:10px;
+}
+
 .dropzone-file__live-progress {
     background-color:green;
     position: absolute;
