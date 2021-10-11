@@ -2,8 +2,8 @@ import React, {useState}  from 'react'
 import {Link} from "gatsby"
 
 export default function Navbar() {
-    const [status, setStatus] = useState(false)
-    const [nav, setNav] = useState(false)
+    const [status, setStatus] = useState<boolean>(false)
+    const [nav, setNav] = useState<boolean>(false)
     
 
     function handleClick(e) {

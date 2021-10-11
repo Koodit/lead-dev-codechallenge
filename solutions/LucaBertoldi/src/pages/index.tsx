@@ -39,8 +39,7 @@ export default function Home() {
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
   const {jobOffer:{descriptionToOffer}} = data;
-  console.log(data);
-  console.log(descriptionToOffer);
+ 
   return (
     <>
     

@@ -1,31 +1,38 @@
-import React, {useCallback, useState} from 'react'
+import React, {ChangeEventHandler, useCallback, useState} from 'react'
+import IInput from './interfaces/inputInterface'
+import IPreview from './interfaces/previewInterface'
 import {FileRejection, useDropzone} from 'react-dropzone'
 import {gql, useMutation} from "@apollo/client"
 import emailjs from "emailjs-com"
 import axios from 'axios';
 import parse from 'html-react-parser';
+import Privacy from './components/Privacy'
 
 const JobApplications = gql `
-  mutation createJob($name: String!, $surname: String!, $email: String!, $phone: String!, $curriculum: String!) {
-    createJobApplication(data: {name: $name, surname: $surname, email: $email, phone: $phone, curriculum: $curriculum}) {
+  mutation createJob($name: String!, $surname: String!, $email: String!, $phone: String!, $note: String!, $curriculum: String!) {
+    createJobApplication(data: {name: $name, surname: $surname, email: $email, phone: $phone, note: $note, curriculum: $curriculum}) {
       id
     }
   }
 `;
 
+
 export default function Form(props) {
     const [files, setFiles] = useState([]);
-    const [inputs, setInputs] = useState({user_name:"", user_surname:"", user_email:"", user_phone:"",user_note:""});
-    const [preview, setPreview] = useState([{display:false, list: ""}]);
-    const [progress, setProgress] = useState(0);
-    const [check, setCheck] = useState(false);
-
+    const [inputs, setInputs] = useState<IInput>({user_name:"", user_surname:"", user_email:"", user_phone:"",user_note:""});
+    const [preview, setPreview] = useState<IPreview[]>([{display:false, list: ""}]);
+    const [progress, setProgress] = useState<number>(0);
+    const [errorDrop, setErrorDrop] = useState<string>("")
 
      const onDrop = useCallback((acceptedFiles: File[],rejFiles: FileRejection[]) => {
-         
+        setErrorDrop("")
         const mapFile = acceptedFiles.map(file => ({file, errors:[]}))
-        const previewFile = acceptedFiles.map(file => setPreview(curr => [...curr, {display:true, list: file.name}]));
-        setFiles(curr => [...curr, ...mapFile, ...rejFiles])
+        const errors = rejFiles.map(err => err.errors[0].message)
+        const realPreview = acceptedFiles.map(file => file.name)
+        setPreview(curr => [...curr, {display:true, list: realPreview[0]}])
+        //const previewFile = acceptedFiles.map(file => setPreview(curr => [...curr, {display:true, list: file.name}]));
+        setFiles(curr => [...curr, ...mapFile])
+        setErrorDrop(errors[0])
         
       }, [])
   
@@ -35,12 +42,15 @@ export default function Form(props) {
    const [mutateFunction] = useMutation(JobApplications);
 
 
-    const handleCheck = () => {
-        setCheck(!check)
+   
+
+    const sendEmail = async (e) => {
+        const emailSend = await emailjs.send(process.env.GATSBY_SERVICE_ID, process.env.GATSBY_TEMPLATE_ID, e, process.env.GATSBY_MAILJS_ID);
+        console.log(emailSend)
     }
   
 
-    const handleChange = (e) =>{
+    const handleChange = (e)  =>{
         const name = e.target.name;
         const value = e.target.value;
         setInputs(values => ({...values, [name]: value}))
@@ -50,38 +60,36 @@ export default function Form(props) {
         setPreview(curr => curr.filter(e=> e.list === list ? "" : e))
         setFiles(curr => curr.filter(e=> e.file.name === list ? "" : e))
     }
-  
-   const uploadImage = async (e) => {
-    const config = {
+
+   const uploadImage = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
+
+    const config: Object = {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+          },
         onUploadProgress: function(progressEvent) {
           var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
           setProgress(percentCompleted);
         }
     }
 
-
-    const fileAdded = {};
+      const fileAdded: Object = {};
       const form = new FormData();
       for(let i = 0; i<files.length; i++) {
-        form.set(`fileUpload`, files[i].file)
+        form.append(`fileUpload`, files[i].file)
 
         try {
-        setPreview([{display:true, list: files[i].file.name}])
-        const response = await axios.post(`${process.env.GATSBY_GCMS_ENDPOINT}/upload`, form,config)
-        
-        /*const blob = await response.blob();
-        const blobtoText = await blob.text();
-        const textJson = await JSON.parse(blobtoText);
-        console.log(textJson)
-       
-        fileAdded[`curriculum${i}`]= response.data.url;
-    */
+            setPreview([{display:true, list: files[i].file.name}])
+            const response = await axios.post(`${process.env.GATSBY_GCMS_ENDPOINT}/upload`, form,config)
+            //fileAdded[`curriculum${i}`]= response.data.url;
         } catch(err) {
             console.log(err);
         } 
     }
     setFiles([])
     setPreview([{display:false, list: ""}])
+
     const emailTemplate = {
         user_name: inputs.user_name,
         user_surname: inputs.user_surname,
@@ -90,18 +98,18 @@ export default function Form(props) {
         user_note: inputs.user_note,
         user_url: JSON.stringify(fileAdded)
     }
-   
-    //await mutateFunction({ variables: {  name: inputs.user_name, surname: inputs.user_surname, email: inputs.user_email, phone: inputs.user_phone, curriculum: JSON.stringify(fileAdded)}})
+
+    try {
+        await mutateFunction({ variables: {  name: inputs.user_name, surname: inputs.user_surname, email: inputs.user_email, phone: inputs.user_phone, note: inputs.user_note, curriculum: JSON.stringify(fileAdded)}})
+    } catch(err) {
+        console.log(err);
+    }
+    
     //sendEmail(emailTemplate)
     }
 
-    const sendEmail = async (e) => {
-        const emailSend = await emailjs.send(process.env.GATSBY_SERVICE_ID, process.env.GATSBY_TEMPLATE_ID, e, process.env.GATSBY_MAILJS_ID);
-        console.log(emailSend)
-    }
-    console.log(files)
-    console.log(preview)
-    console.log(props.formInput[8].account.html)
+  
+
     return (
         <div className="form-application__container">
             <div className="form-cv-column">
@@ -127,7 +135,7 @@ export default function Form(props) {
                             {parse(props.formInput[8].account.html)}
                         </div>
                         <div>
-                            <input type="text" className="form-application__input" placeholder="Username Github" value={inputs.user_note} onChange={handleChange}/>
+                            <input type="text" className="form-application__input" placeholder="Username Github" name="user_note" value={inputs.user_note} onChange={handleChange}/>
                         </div>
                     </div>
                     {//<textarea name="user_note" className="form-application__input" onChange={handleChange} value={inputs.user_note} placeholder={props.formInput[8].note}></textarea>
@@ -149,7 +157,9 @@ export default function Form(props) {
                             <em className="dropzone-file__counter">{files.length} of 10</em>
                         
                         </div>
-                        
+                        {<p>{errorDrop}</p>
+                        }
+
                         {
 
                         preview.map((e, i) => {
@@ -173,26 +183,8 @@ export default function Form(props) {
                             )
                             
                         })}
-                       
-                       <div className="section-privacy">
-                           <h6 className="section-privacy__title">Per la tua privacy</h6>
-                           <p className="section-privacy__article"> Dichiaro di aver letto l'informativa su privacy e cookie e autorizzo Koodit s.r.l. al trattamento dei miei dati personali, in conformità con il Regolamento Europeo Privacy 679/2016.</p>
-                           <p className="section-privacy__article">*Acconsento al trattamento dei miei dati personali per le finalità di invio di materiale promozionale e marketing da parte di Koodit s.r.l</p>
-                           <div>
-                               <input type="checkbox" id="agree" value="Acconsento"/>
-                               <label htmlFor="agree">Acconsento (*)</label>
-                           </div>
-                           <p className="section-privacy__article">*Autorizzo il trattamento dei miei dati personali ai sensi del Dlgs 196 del 30 giugno 2003 e dell’art. 13 GDPR (Regolamento UE 2016/679) ai fini della ricerca e selezione del personale.</p>
-                           <div>
-                               <input type="checkbox" id="agree" value="Acconsento" onClick={handleCheck}/>
-                               <label htmlFor="agree">Autorizzo (*)</label>
-                           </div>
+                        <Privacy></Privacy>
                        </div>
-                    </div>
-                    {   check ?
-                        <button className="send-application" type="submit">INVIA CANDIDATURA</button> :
-                        <button className="send-application opacity" type="submit" disabled>INVIA CANDIDATURA</button>
-                    }
                
             </form>
 

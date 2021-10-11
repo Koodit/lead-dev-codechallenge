@@ -6,7 +6,7 @@ import {Link} from "gatsby"
 
 
 export default function Header() {
-    const [scroll, setScroll] = useState(false);
+    const [scroll, setScroll] = useState<boolean>(false);
 
     useEffect(() => {
         window.addEventListener("scroll", () => {

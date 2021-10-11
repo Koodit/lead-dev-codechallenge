@@ -1,11 +1,8 @@
 import React, {useState} from 'react'
 import parse from 'html-react-parser';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faPlus, faTimes} from "@fortawesome/free-solid-svg-icons"
 
 export default function JobDescription(props) {
-    console.log(props);
-    const [toggleClick, settoggleClick] = useState(false)
+    const [toggleClick, settoggleClick] = useState<boolean>(false)
     const handleClick = (e) => {
         console.log(e.currentTarget.children[1])
         settoggleClick(!toggleClick)
