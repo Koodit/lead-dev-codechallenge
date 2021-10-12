@@ -21,4 +21,5 @@ The next step will be add some Jest test to test if the page is rendered correct
 
 **WHAT IS STILL MISSING**
 
-The graphic is not the same in all part (example file loading) and dropzone "cerca" button is different. These are the first things to fix.
+- The **graphic is not the same in all part** (example file loading) and dropzone "cerca" button is different. These are the first things to fix.
+- **loader** after the "INVIA CANDIDATURA" is sent (wait a bit for the toastify message)
