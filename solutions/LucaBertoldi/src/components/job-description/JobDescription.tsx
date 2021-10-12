@@ -4,7 +4,6 @@ import parse from 'html-react-parser';
 export default function JobDescription(props) {
     const [toggleClick, settoggleClick] = useState<boolean>(false)
     const handleClick = (e) => {
-        console.log(e.currentTarget.children[1])
         settoggleClick(!toggleClick)
     }
     

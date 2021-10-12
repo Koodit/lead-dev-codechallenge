@@ -6,6 +6,7 @@ import Form from "../components/form/Form"
 import {gql, useQuery} from "@apollo/client"
 import "../style/index.css";
 
+// query is called to get the content of the page
 const GET_CONTENT = gql`
   query MyQuery {
   jobOffer(where: {titleOffer: "Lead Web Developer"}) {
@@ -40,6 +41,7 @@ export default function Home() {
   if (error) return `Error! ${error.message}`;
   const {jobOffer:{descriptionToOffer}} = data;
  
+  // map the content and assign to every jobDescription the title and description text
   return (
     <>
     

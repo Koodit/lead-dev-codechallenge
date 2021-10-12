@@ -14,7 +14,7 @@ import {faFile, faTimesCircle} from "@fortawesome/free-solid-svg-icons"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
+//launch toastify message
 toast.configure()
 
 export default function Form(props) {
@@ -24,16 +24,21 @@ export default function Form(props) {
     const [progress, setProgress] = useState<number>(0);
     const [errorDrop, setErrorDrop] = useState<string>("")
     
+    //dropzone function for uploading
      const onDrop = useCallback((acceptedFiles: File[],rejFiles: FileRejection[]) => {
         setErrorDrop("")
+        // map all the accepted file
         const mapFile = acceptedFiles.map(file => ({file, errors:[]}))
+        // map all the errors: maxsize, more than 10, not pdf
         const errors: string[]  = rejFiles.map(err => err.errors[0].message)
+        // variable for the preview of the accepted file
         const previewFile: string[] = acceptedFiles.map(file => file.name)
         setPreview(curr => [...curr, {display:true, list: previewFile[0]}])
         setFiles(curr => [...curr, ...mapFile])
         setErrorDrop(errors[0])
       }, [])
   
+      // config for axios uploaded progress needed to render the progress bar
     const config: Object = {
         headers: {
             'Content-Type': 'multipart/form-data'
@@ -68,11 +73,13 @@ export default function Form(props) {
         for(let i = 0; i<files.length; i++) {
 
             try {
+                //upload a file and set preview to accept only the filename
                 form.append(`fileUpload`, files[i].file)
                 setPreview([{display:true, list: files[i].file.name}])
                 const response = await axios.post(`${process.env.GATSBY_GCMS_ENDPOINT}/upload`, form,config)
                 const dataString: string = JSON.stringify(response.data);
                 const dataUrl: string = JSON.parse(dataString).url;
+                // this is needed to pass the url of the cv pdf added to the graphcms database (it'll be a list of CV) and to emailjs
                 fileAdded[`curriculum${i}`] = dataUrl;
             } catch(err) {
                 console.log(err)
@@ -81,6 +88,7 @@ export default function Form(props) {
         }
 
             try {
+                //send the data from the form via mutate query
                 await mutateFunction({ variables: {  name: inputs.user_name, surname: inputs.user_surname, email: inputs.user_email, phone: inputs.user_phone, note: inputs.user_note, curriculum: JSON.stringify(fileAdded)}})
                 await sendEmail(emailTemplate(inputs,fileAdded))
                 toast('Application Sent!', {
@@ -103,6 +111,7 @@ export default function Form(props) {
   
 
     return (
+       /* FORM */
         <div className="form-application__container">
             <div className="form-cv-column">
             <form className="form-application"
@@ -130,7 +139,8 @@ export default function Form(props) {
                             <input type="text" className="form-application__input" placeholder="Username Github" name="user_note" value={inputs.user_note} onChange={handleChange}/>
                         </div>
                     </div>
-               
+
+               {/* DROPZONE CONTAINER */}
                     <div className="dropzone-container">
                         <p className="dropzone-file-size"><b>Carica il tuo curriculum</b> (obbligatorio file pdf max 1.5MB)</p>
                         

@@ -1,6 +1,6 @@
 import emailjs from "emailjs-com"
 
-
+// EMAIL TEMPLATE NEEDED TO BE SENT VIA EMAIL
 const emailTemplate = (inputs, fileAdded) => {
     const template = {
         user_name: inputs.user_name,
