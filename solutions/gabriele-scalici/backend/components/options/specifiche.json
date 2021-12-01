@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_options_specifiches",
+  "info": {
+    "name": "Specifiche",
+    "icon": "align-left"
+  },
+  "options": {},
+  "attributes": {
+    "Chi_cerchiamo": {
+      "type": "richtext"
+    },
+    "Job_Description": {
+      "type": "richtext"
+    },
+    "Chi_Siamo": {
+      "type": "richtext"
+    },
+    "Requirements": {
+      "type": "richtext"
+    },
+    "Formazione_interna": {
+      "type": "richtext"
+    },
+    "Benefits_aziendali": {
+      "type": "richtext"
+    },
+    "RAL": {
+      "type": "richtext"
+    },
+    "Sede_di_lavoro": {
+      "type": "richtext"
+    }
+  }
+}

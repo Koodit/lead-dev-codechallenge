@@ -1,0 +1,6 @@
+Dockerfile
+node_modules
+public
+.cache
+wait-for
+docker-entrypoint.sh
