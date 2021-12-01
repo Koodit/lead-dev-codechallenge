@@ -21,7 +21,7 @@ I contenuti provengono da un database SQL strutturato appositamente.
 ## Requisiti
 
 - Rinominare il file `.env.example` a `.env`
-- Lanciare il container con `docker-compose up`
+- Lanciare i containers con `docker-compose up`
 
 ## CMS
 - Per accedere al CMS su http://localhost:1337 usare i seguenti dati:  
@@ -30,5 +30,11 @@ Username: admin@root.local
 Password: Password1!
 ```
 
+## Frontend
+Dopo l'avvio del frontend, l'url per raggiungerlo è http://localhost:8000, javascript è richiesto per il normale funzionamento delle pagine.
+
 ## Ricezione E-mail
-L'email verrà ricevuta direttamente all'indirizzo e-mail inserito nel form.
+L'email verrà ricevuta direttamente all'indirizzo e-mail inserito nel form. Le email sono inviate senza auth direttamente da node sendmail (controllare il filtro anti-spam in caso di mancata ricezione).
+
+## MariaDB e Adminer
+Le credenziali per accedere al database sono incluse all'interno del file `.env.example` e il dump del database caricato durante l'avvio dei container. Il pannello di controllo Adminer è raggiungibile all'indirizzo http://localhost:8080, utilizzando `db` come host e il resto delle credenziali incluse.
