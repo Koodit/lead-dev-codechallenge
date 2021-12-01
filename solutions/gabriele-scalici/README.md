@@ -34,7 +34,7 @@ Password: Password1!
 Dopo l'avvio del frontend, l'url per raggiungerlo è http://localhost:8000, javascript è richiesto per il normale funzionamento delle pagine.
 
 ## Ricezione E-mail
-L'email verrà ricevuta direttamente all'indirizzo e-mail inserito nel form. Le email sono inviate senza auth direttamente da node sendmail (controllare il filtro anti-spam in caso di mancata ricezione).
+L'email verrà inviata direttamente all'indirizzo e-mail inserito nel form. Le email sono inviate senza auth direttamente da node sendmail (controllare il filtro anti-spam in caso di mancata ricezione).
 
 ## MariaDB e Adminer
 Le credenziali per accedere al database sono incluse all'interno del file `.env.example` e il dump del database caricato durante l'avvio dei container. Il pannello di controllo Adminer è raggiungibile all'indirizzo http://localhost:8080, utilizzando `db` come host e il resto delle credenziali incluse.
