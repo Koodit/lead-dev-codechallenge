@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1, h2 {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 32px;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+#application-page h1 {
+  font-weight: 600;
+  font-size: 55px;
+}
+
+#application-page h2 {
+  font-size: 30px;
+}
+
+#card-body p {
+  margin-bottom: 1rem; 
+}
+
+/* @keyframes expand {
+  0%   {height: 0;}
+  100% {height: 200px;}
+}
+@keyframes collapses {
+  0%   {height: 200px;}
+  100% {height: 0;}
+} */
+
+/* collapse animation */
+.expanded {
+  display: block;
+}
+.collapsed {
+  display: none;
+}
+.icon-expanded {
+  transform: rotate(45deg);
+}
