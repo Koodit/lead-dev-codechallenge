@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "jobs",
+  "info": {
+    "name": "Job"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Ruolo": {
+      "type": "string"
+    },
+    "Specifiche": {
+      "type": "component",
+      "repeatable": true,
+      "component": "options.specifiche"
+    },
+    "candidates": {
+      "via": "job",
+      "collection": "candidate"
+    }
+  }
+}
