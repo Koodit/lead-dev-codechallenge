@@ -1,0 +1,54 @@
+.koodit-header__logo {
+    width: 130px;
+}
+
+
+.koodit-header {
+    position: fixed;
+    z-index:2;
+    top:0;
+    right:0;
+    left:0;
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-left:25px;
+    padding-right:25px;
+    z-index:1000;
+    background-color: #fff;
+}
+
+.koodit-header__container {
+    display:flex;
+    justify-content: space-between;
+    height:80px;
+    align-items: center;
+    position:relative;
+}
+
+.border-scroll {
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 8%)
+  }
+
+  @media all and (min-width: 992px) {
+    .koodit-header__hamburger {
+      display: none;
+    }
+
+    .koodit-header__navlinks {
+      display:flex;
+  }
+  }
+
+  @media all and (min-width: 576px) {
+    .koodit-header {
+        padding-left:88.5px;
+        padding-right:88.5px;
+    }
+  }
+
+  @media all and (min-width: 992px) {
+    .koodit-header {
+        padding-left:110.5px;
+        padding-right:110.5px;
+    }
+  }

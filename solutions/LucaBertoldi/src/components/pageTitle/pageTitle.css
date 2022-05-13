@@ -1,0 +1,29 @@
+.page-path {
+    color:#336fb5;
+}
+
+.page-path a {
+    padding:0 5px;
+    text-decoration: none;
+}
+.page-path a:hover {
+    text-decoration: underline;
+}
+
+.page-title__container {
+    color:#336fb5;
+}
+
+.page-title{
+    margin-bottom:8px;
+    font-weight: 600;
+    font-size:55px;
+}
+
+.application-title {
+    margin:0;
+    line-height: 1.2;
+    font-weight: 500;
+    color:#3470B6;
+    font-size:30px;
+}

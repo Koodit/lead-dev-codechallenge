@@ -1,0 +1,172 @@
+
+
+.form-cv-column {
+    display:flex;
+    flex-direction: column;
+}
+
+.form-application {
+    display:block;
+    width:100%;
+}
+
+.dropzone {
+    border:2px dashed #336fb5;
+    position:relative;
+    border-radius:5px;
+    color:#336fb5;
+    padding:15px 20px;
+}
+
+.dropzone-title {
+    margin: 5px 0 10px 0px;
+    font-size:30px;
+    font-weight: 500;
+    color:#336fb5;
+}
+
+.dropzone-file-size {
+    color:#336fb5;
+}
+
+.dropzone-file__counter {
+    color:#000;
+    position: absolute;
+    right:5px;
+    bottom:3px;
+    font-size:12px;
+}
+
+.dropzone-message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.dropzone-file__progress-bar {
+    position:relative;
+    width:100%;
+    background-color:#fff;
+    border:1px solid #000;
+    height:10px;
+    border-radius:5px;
+}
+
+.dropzone-file__container {
+    margin-top:5px;
+}
+
+.dropzone-delete__container {
+    text-align:right;
+    margin-right: 20px;
+    margin-top:10px;
+    font-size:20px;
+}
+
+.dropzone-file__progress-container {
+    width:100%;
+}
+
+.dropzone-file__icon {
+    font-size:20px;
+    margin-right:10px;
+}
+
+.dropzone-file__live-progress {
+    background-color:green;
+    position: absolute;
+    height:10px;
+}
+
+.dropzone-errors {
+    color: red;
+}
+
+.form-application__input {
+    padding:.375rem .75rem;
+    background-color: #fff;
+    width:100%;
+    line-height: 1.5;
+    margin-right:10px;
+}
+
+.form-application__input[type=text] {
+    border: none;
+    border-bottom:2px solid #336fb5;
+}
+
+.form-application__input[type=email] {
+    border: none;
+    border-bottom:2px solid #336fb5;
+}
+
+.form-application__account-description {
+    padding: 20px 0px 20px 0;
+}
+
+.form-row__container {
+    display:flex;
+    flex-direction: column;
+}
+
+.form-row__row {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+input:focus{
+    outline: none;
+}
+
+.section-privacy {
+    color:#3470B6;
+}
+
+.section-privacy__title {
+    margin-bottom:2px;
+}
+
+.section-privacy__article {
+    font-size: 9px;
+}
+
+.send-application {
+    background-color: #336fb5; 
+    height: calc(1.5em + .75rem + 2px);
+  border: none;
+  color: white;
+  cursor:pointer;
+  padding: 0;
+  margin-top:10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  width:100%;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+
+.opacity {
+    opacity:0.65;
+}
+
+.form-application__account-container {
+    margin-bottom:50px;
+}
+
+@media all and (min-width: 992px) {
+    .form-application__container {
+        max-width: 55%;
+    }
+    .form-row__row {
+        flex-direction: row;
+    }
+
+    .form-application__account-description {
+        padding: 20px 50px 20px 0;
+    }
+}
+
